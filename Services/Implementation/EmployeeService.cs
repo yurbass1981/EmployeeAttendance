@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EmployeeAttendance.DAL.Entity;
-using EmployeeAttendance.Repositories;
+using EmployeeAttendance.DAL.Entities;
+using EmployeeAttendance.DAL.Repositories;
 
 namespace EmployeeAttendance.Services.Implementation
 {
@@ -34,7 +34,7 @@ namespace EmployeeAttendance.Services.Implementation
             throw new NotImplementedException();
         }
 
-        public void GetEmployee(Guid id)
+        public Employee GetById(Guid id)
         {
             throw new NotImplementedException();
         }
