@@ -21,27 +21,37 @@ namespace EmployeeAttendance.Services.Implementation
         public void Create(Employee employee)
         {
             _logger.LogInformation($"Executing {nameof(Create)} method");
-            throw new NotImplementedException();
+            _employeeRepository.Create(employee);
         }
 
         public void Delete(Guid id)
-        {
-            throw new NotImplementedException();
+        {   
+            _employeeRepository.Delete(id);
         }
 
         public IEnumerable<Employee> GetAll()
         {
-            throw new NotImplementedException();
+            return _employeeRepository.GetAll();
         }
 
         public Employee GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return _employeeRepository.GetById(id);
         }
 
         public void Update(Guid id, Employee employee)
         {
-            throw new NotImplementedException();
+            // _employeeRepository.Update(id, employee);
+
+            var employeeToUpdate = GetById(id);
+
+            if (id != null)
+            {
+                employeeToUpdate.Name = employee.Name;
+                employeeToUpdate.LastName = employee.LastName;
+                employeeToUpdate.Age = employee.Age;
+                employeeToUpdate.HireDate = employee.HireDate;
+            }
         }
     }
 }
