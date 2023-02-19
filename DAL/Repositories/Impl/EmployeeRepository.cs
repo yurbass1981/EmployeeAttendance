@@ -36,7 +36,7 @@ namespace EmployeeAttendance.DAL.Repositories.Impl
 
         public Employee GetById(Guid id)
         {
-            return _employees.FirstOrDefault(e => e.Id == id);
+            return _employees.FirstOrDefault(e => e.Id == id)!;
         }
 
         public void Update(Guid id, Employee employee)
