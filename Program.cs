@@ -1,12 +1,16 @@
 using EmployeeAttendance.DAL.Repositories;
 using EmployeeAttendance.DAL.Repositories.Impl;
+using EmployeeAttendance.Data;
 using EmployeeAttendance.Services;
 using EmployeeAttendance.Services.Implementation;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddDbContext<DataContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConection")));
 builder.Services.AddControllers();
 
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
