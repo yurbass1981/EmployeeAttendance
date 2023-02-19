@@ -1,3 +1,4 @@
+using EmployeeAttendance.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeAttendance.Controllers;
@@ -6,11 +7,13 @@ namespace EmployeeAttendance.Controllers;
 [Route("[controller]")]
 public class EmployeeController : ControllerBase
 {
+    private readonly IEmployeeService _employeeService;
     private readonly ILogger<EmployeeController> _logger;
 
-    public EmployeeController(ILogger<EmployeeController> logger)
+    public EmployeeController(ILogger<EmployeeController> logger, IEmployeeService employeeService)
     {
         _logger = logger;
+        _employeeService = employeeService;
     }
 
     [HttpGet]
