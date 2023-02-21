@@ -1,11 +1,24 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace EmployeeAttendance.DAL.Entities
 {
     public class Employee
     {
+        [Key]
         public Guid Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public string LastName { get; set; } = string.Empty;
+
+        [Required]
+        [MaxLength(100)]
+        public string Name { get; set; } 
+
+        [Required]
+        [MaxLength(100)]
+        public string LastName { get; set; }
+
+        [Required]
         public int Age { get; set; }
-        public DateOnly HireDate { get; set; }
+
+        [Required]
+        public DateTime HireDate { get; set; }
     }
 }
