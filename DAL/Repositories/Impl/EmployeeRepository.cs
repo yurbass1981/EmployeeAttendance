@@ -17,15 +17,8 @@ namespace EmployeeAttendance.DAL.Repositories.Impl
             _employees.Add(employee);
         }
 
-        public void Delete(Guid id)
+        public void Delete(Employee employeeToDelete)
         {
-            var employeeToDelete = _employees.FirstOrDefault(e => e.Id == id);
-
-            if (employeeToDelete == null)
-            {
-                throw new Exception($"Employee with id: {id} not found.");
-            }
-
             _employees.Remove(employeeToDelete);
         }
 
@@ -34,22 +27,9 @@ namespace EmployeeAttendance.DAL.Repositories.Impl
             return _employees;
         }
 
-        public Employee GetById(Guid id)
+        public Employee? GetById(Guid id)
         {
-            return _employees.FirstOrDefault(e => e.Id == id)!;
-        }
-
-        public void Update(Guid id, Employee employee)
-        {
-            var employeeToUpdate = GetById(id);
-
-            if (id != null)
-            {
-                employeeToUpdate.Name = employee.Name;
-                employeeToUpdate.LastName = employee.LastName;
-                employeeToUpdate.Age = employee.Age;
-                employeeToUpdate.HireDate = employee.HireDate;
-            }
+            return _employees.FirstOrDefault(e => e.Id == id);
         }
     }
 }

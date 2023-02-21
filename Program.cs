@@ -1,6 +1,6 @@
+using EmployeeAttendance.DAL;
 using EmployeeAttendance.DAL.Repositories;
 using EmployeeAttendance.DAL.Repositories.Impl;
-using EmployeeAttendance.Data;
 using EmployeeAttendance.Services;
 using EmployeeAttendance.Services.Implementation;
 using Microsoft.EntityFrameworkCore;

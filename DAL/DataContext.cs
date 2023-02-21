@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using EmployeeAttendance.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace EmployeeAttendance.Data
+namespace EmployeeAttendance.DAL
 {
     public class DataContext : DbContext
     {
@@ -14,7 +14,5 @@ namespace EmployeeAttendance.Data
         {
 
         }
-
-        
     }
 }
