@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeAttendance.Controllers;
 
+[Route("api/[controller]")]
 [ApiController]
-[Route("[controller]")]
 public class EmployeeController : ControllerBase
 {
     private readonly IEmployeeService _employeeService;
@@ -17,10 +17,11 @@ public class EmployeeController : ControllerBase
         _employeeService = employeeService;
     }
 
+   
     public IActionResult Create(Employee employee)
     {
         _employeeService.Create(employee);
-        return Ok(employee);
+        return Ok();
     }
 
     [HttpGet]
