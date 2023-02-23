@@ -1,3 +1,4 @@
+using EmployeeAttendance.DAL.Entities;
 using EmployeeAttendance.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,9 +17,28 @@ public class EmployeeController : ControllerBase
         _employeeService = employeeService;
     }
 
-    [HttpGet]
-    public IActionResult Get()
+    public IActionResult Create(Employee employee)
     {
-        return null;
+        _employeeService.Create(employee);
+        return Ok(employee);
+    }
+
+    [HttpGet]
+    public IActionResult GetAll()
+    {        
+        var allEmployees = _employeeService.GetAll();
+        return Ok(allEmployees);
+    }
+
+    public IActionResult Update(Guid id, Employee employee)
+    {
+        _employeeService.Update(id, employee);
+        return Ok();
+    }
+
+    public IActionResult Delete(Guid id)
+    {
+        _employeeService.Delete(id);
+        return Ok();
     }
 }
