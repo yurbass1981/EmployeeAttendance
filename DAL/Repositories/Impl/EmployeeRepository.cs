@@ -8,28 +8,37 @@ namespace EmployeeAttendance.DAL.Repositories.Impl
 {
     public class EmployeeRepository : IEmployeeRepository
     {
+        private readonly DataContext _dataContext;
+        public EmployeeRepository(DataContext dataContext)
+        {
+            _dataContext = dataContext;
+        }
         //Temporal MOCK
-        private static readonly List<Employee> _employees = new();
+        // private static readonly List<Employee> _employees = new();
 
         public void Create(Employee employee)
         {
             employee.Id = Guid.NewGuid();
-            _employees.Add(employee);
+            _dataContext.Add(employee);
+            _dataContext.SaveChanges();
         }
 
         public void Delete(Employee employeeToDelete)
         {
-            _employees.Remove(employeeToDelete);
+            _dataContext.Remove(employeeToDelete);
+            _dataContext.SaveChanges();
         }
 
         public IEnumerable<Employee> GetAll()
         {
-            return _employees;
+            var employees = GetAll();
+            return employees;
         }
 
         public Employee? GetById(Guid id)
         {
-            return _employees.FirstOrDefault(e => e.Id == id);
+            var employee = GetById(id);
+            return employee;
         }
     }
 }
