@@ -22,6 +22,7 @@ namespace EmployeeAttendance.Services.Implementation
         {
             _logger.LogInformation($"Executing {nameof(Create)} method");
             _employeeRepository.Create(employee);
+            _employeeRepository.SaveChanges();
         }
 
         public void Delete(Guid id)
@@ -30,6 +31,7 @@ namespace EmployeeAttendance.Services.Implementation
 
             var employeeToDelete = GetById(id);
             _employeeRepository.Delete(employeeToDelete);
+            _employeeRepository.SaveChanges();
         }
 
         public IEnumerable<Employee> GetAll()
@@ -64,6 +66,8 @@ namespace EmployeeAttendance.Services.Implementation
             employeeToUpdate.LastName = employee.LastName;
             employeeToUpdate.Age = employee.Age;
             employeeToUpdate.HireDate = employee.HireDate;
+
+            _employeeRepository.SaveChanges();
         }
     }
 }
