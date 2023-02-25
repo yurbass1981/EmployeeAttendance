@@ -13,32 +13,31 @@ namespace EmployeeAttendance.DAL.Repositories.Impl
         {
             _dataContext = dataContext;
         }
-        //Temporal MOCK
-        // private static readonly List<Employee> _employees = new();
-
+        
         public void Create(Employee employee)
         {
             employee.Id = Guid.NewGuid();
-            _dataContext.Add(employee);
-            _dataContext.SaveChanges();
+            _dataContext.Employees.Add(employee);
         }
 
         public void Delete(Employee employeeToDelete)
         {
-            _dataContext.Remove(employeeToDelete);
-            _dataContext.SaveChanges();
+            _dataContext.Employees.Remove(employeeToDelete);
         }
 
         public IEnumerable<Employee> GetAll()
         {
-            var employees = GetAll();
-            return employees;
+            return _dataContext.Employees;
         }
 
         public Employee? GetById(Guid id)
         {
-            var employee = GetById(id);
-            return employee;
+            return _dataContext.Employees.FirstOrDefault(e => e.Id == id);
+        }
+
+        public void SaveChanges()
+        {
+           _dataContext.SaveChanges();
         }
     }
 }
