@@ -8,8 +8,8 @@ namespace EmployeeAttendance.Controllers;
 [ApiController]
 public class EmployeeController : ControllerBase
 {
-    private readonly IEmployeeService _employeeService;
     private readonly ILogger<EmployeeController> _logger;
+    private readonly IEmployeeService _employeeService;
 
     public EmployeeController(ILogger<EmployeeController> logger, IEmployeeService employeeService)
     {
@@ -17,26 +17,35 @@ public class EmployeeController : ControllerBase
         _employeeService = employeeService;
     }
 
-   
+    [HttpPost]
     public IActionResult Create(Employee employee)
     {
         _employeeService.Create(employee);
         return Ok();
     }
 
+    [HttpGet("{id:guid}")]
+    public IActionResult GetById(Guid id)
+    {
+        var employee = _employeeService.GetById(id);
+        return Ok(employee);
+    }
+
     [HttpGet]
     public IActionResult GetAll()
-    {        
+    {
         var allEmployees = _employeeService.GetAll();
         return Ok(allEmployees);
     }
 
+    [HttpPut]
     public IActionResult Update(Guid id, Employee employee)
     {
         _employeeService.Update(id, employee);
         return Ok();
     }
 
+    [HttpDelete]
     public IActionResult Delete(Guid id)
     {
         _employeeService.Delete(id);
