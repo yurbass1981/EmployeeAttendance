@@ -9,12 +9,12 @@ namespace EmployeeAttendance.Controllers
     [ApiController]
     public class AttendanceController : ControllerBase
     {
-        private readonly IAttendanceService _attendanceService;
+        // private readonly IAttendanceService _attendanceService;
 
-        public AttendanceController(IAttendanceService attendanceService)
-        {
-            _attendanceService = attendanceService;
-        }
+        // public AttendanceController(IAttendanceService attendanceService)
+        // {
+        //     _attendanceService = attendanceService;
+        // }
 
         public IActionResult Create(Attendance attendance)
         {
