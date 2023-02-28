@@ -2,8 +2,8 @@ using EmployeeAttendance.DAL.Entities;
 
 namespace EmployeeAttendance.Services
 {
-    public interface IEmployeeAttendanceService
+    public interface IAttendanceService
     {
-        
+
     }
 }

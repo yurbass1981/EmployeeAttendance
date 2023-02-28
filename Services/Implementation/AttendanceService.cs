@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeAttendance.Services.Implementation
 {
-    public class EmployeeAttendanceService
+    public class AttendanceService
     {
         
     }
