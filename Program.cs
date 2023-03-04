@@ -1,4 +1,5 @@
 using EmployeeAttendance.DAL;
+using EmployeeAttendance.DAL.EntityTypeConfig;
 using EmployeeAttendance.DAL.Repositories;
 using EmployeeAttendance.DAL.Repositories.Impl;
 using EmployeeAttendance.Services;
