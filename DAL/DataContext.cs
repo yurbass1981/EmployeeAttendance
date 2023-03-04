@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
 using EmployeeAttendance.DAL.Entities;
+using EmployeeAttendance.DAL.EntityTypeConfig;
 using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeAttendance.DAL
@@ -15,6 +11,12 @@ namespace EmployeeAttendance.DAL
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AttendanceEntityTypeConfig).Assembly);
         }
     }
 }
