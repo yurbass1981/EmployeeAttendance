@@ -11,6 +11,7 @@ namespace EmployeeAttendance.Controllers
     {
         private readonly ILogger<EmployeeController> _logger;
         private readonly IAttendanceService _attendanceService;
+        
         public AttendanceController(ILogger<EmployeeController> logger, IAttendanceService attendanceService)
         {
             _logger = logger;

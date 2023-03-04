@@ -12,7 +12,7 @@ namespace EmployeeAttendance.DAL.Repositories.Impl
         
         public void Create(Employee employee)
         {
-            employee.Id = Guid.NewGuid();
+            // employee.Id = Guid.NewGuid();
             _dataContext.Employees.Add(employee);
         }
 

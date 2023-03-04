@@ -5,18 +5,25 @@ namespace EmployeeAttendance.Services.Implementation
 {
     public class AttendanceService : IAttendanceService
     {
-        
+        private readonly IEmployeeService _employeeService;
         private readonly IAttendanceRepository _attendanceRepository;
         private readonly ILogger<AttendanceService> _logger;
 
-        public AttendanceService(IAttendanceRepository attendanceRepository, ILogger<AttendanceService> logger)
+        public AttendanceService(IEmployeeService employeeService,
+            IAttendanceRepository attendanceRepository,
+            ILogger<AttendanceService> logger
+            )
         {
+            _employeeService = employeeService;
             _attendanceRepository = attendanceRepository;
             _logger = logger;
         }
+
         public void Create(Attendance attendance)
         {
             _logger.LogInformation($"Executing {nameof(Create)} method");
+
+            _employeeService.GetById(attendance.EmployeeId);
             _attendanceRepository.Create(attendance);
             _attendanceRepository.SaveChanges();
         }
@@ -31,14 +38,14 @@ namespace EmployeeAttendance.Services.Implementation
         }
 
         public IEnumerable<Attendance> GetAll()
-        {            
+        {
             _logger.LogInformation($"Executing {nameof(GetAll)} method");
 
             return _attendanceRepository.GetAll();
         }
 
         public Attendance GetById(Guid id)
-        {            
+        {
             _logger.LogInformation($"Executing {nameof(GetById)} method");
 
             var attendance = _attendanceRepository.GetById(id);
@@ -53,13 +60,13 @@ namespace EmployeeAttendance.Services.Implementation
         }
 
         public void Update(Guid id, Attendance attendance)
-        {            
+        {
             _logger.LogInformation($"Executing {nameof(Update)} method");
 
             var attendanceToUpdate = GetById(id);
 
-            attendanceToUpdate.CrossDateTime = attendance.CrossDateTime;            
-            attendanceToUpdate.AttendanceType = attendance.AttendanceType;            
+            attendanceToUpdate.CrossDateTime = attendance.CrossDateTime;
+            attendanceToUpdate.AttendanceType = attendance.AttendanceType;
 
             _attendanceRepository.SaveChanges();
         }
