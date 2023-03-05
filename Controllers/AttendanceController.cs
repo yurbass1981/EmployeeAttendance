@@ -19,37 +19,37 @@ namespace EmployeeAttendance.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Attendance attendance)
+        public async Task<IActionResult> Create(Attendance attendance)
         {
-            _attendanceService.Create(attendance);
+            await _attendanceService.Create(attendance);
             return Ok();
         }
 
         [HttpGet("{id:guid}")]
-        public IActionResult GetById(Guid id)
+        public async Task<IActionResult> GetById(Guid id)
         {
-            var attendance = _attendanceService.GetById(id);
+            var attendance = await _attendanceService.GetById(id);
             return Ok(attendance);
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var allAttendances = _attendanceService.GetAll();
+            var allAttendances = await _attendanceService.GetAll();
             return Ok(allAttendances);
         }
 
         [HttpPut]
-        public IActionResult Update(Guid id, Attendance attendance)
+        public async Task<IActionResult> Update(Guid id, Attendance attendance)
         {
-            _attendanceService.Update(id, attendance);
+            await _attendanceService.Update(id, attendance);
             return Ok();
         }
 
         [HttpDelete]
-        public IActionResult Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            _attendanceService.Delete(id);
+            await _attendanceService.Delete(id);
             return Ok();
         }
 

@@ -18,37 +18,37 @@ public class EmployeeController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Create(Employee employee)
+    public async Task<IActionResult> Create(Employee employee)
     {
-        _employeeService.Create(employee);
+        await _employeeService.Create(employee);
         return Ok();
     }
 
     [HttpGet("{id:guid}")]
-    public IActionResult GetById(Guid id)
+    public async Task<IActionResult> GetById(Guid id)
     {
-        var employee = _employeeService.GetById(id);
+        var employee = await _employeeService.GetById(id);
         return Ok(employee);
     }
 
     [HttpGet]
-    public IActionResult GetAll()
+    public async Task<IActionResult> GetAll()
     {
-        var allEmployees = _employeeService.GetAll();
+        var allEmployees = await _employeeService.GetAll();
         return Ok(allEmployees);
     }
 
     [HttpPut]
-    public IActionResult Update(Guid id, Employee employee)
+    public async Task<IActionResult> Update(Guid id, Employee employee)
     {
-        _employeeService.Update(id, employee);
+        await _employeeService.Update(id, employee);
         return Ok();
     }
 
     [HttpDelete]
-    public IActionResult Delete(Guid id)
+    public async Task<IActionResult> Delete(Guid id)
     {
-        _employeeService.Delete(id);
+        await _employeeService.Delete(id);
         return Ok();
     }
 }

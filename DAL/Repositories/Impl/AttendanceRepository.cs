@@ -1,9 +1,10 @@
 using EmployeeAttendance.DAL.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeAttendance.DAL.Repositories.Impl
 {
     public class AttendanceRepository : IAttendanceRepository
-    {        
+    {
         private readonly DataContext _dataContext;
 
         public AttendanceRepository(DataContext dataContext)
@@ -11,10 +12,10 @@ namespace EmployeeAttendance.DAL.Repositories.Impl
             _dataContext = dataContext;
         }
 
-        public void Create(Attendance attendance)
+        public async Task Create(Attendance attendance)
         {
             // attendance.Id = Guid.NewGuid();
-            _dataContext.Attendances.Add(attendance);
+            await _dataContext.Attendances.AddAsync(attendance);
         }
 
         public void Delete(Attendance attendanceToDelete)
@@ -22,19 +23,19 @@ namespace EmployeeAttendance.DAL.Repositories.Impl
             _dataContext.Attendances.Remove(attendanceToDelete);
         }
 
-        public IEnumerable<Attendance> GetAll()
+        public async Task<IEnumerable<Attendance>> GetAll()
         {
-            return _dataContext.Attendances;
+            return await _dataContext.Attendances.ToListAsync();
         }
 
-        public Attendance? GetById(Guid id)
+        public async Task<Attendance?> GetById(Guid id)
         {
-            return _dataContext.Attendances.FirstOrDefault(a => a.Id == id);
+            return await _dataContext.Attendances.FirstOrDefaultAsync(a => a.Id == id);
         }
 
-        public void SaveChanges()
+        public async Task SaveChanges()
         {
-            _dataContext.SaveChanges();
+            await _dataContext.SaveChangesAsync();
         }
     }
 }

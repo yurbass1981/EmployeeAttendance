@@ -1,4 +1,5 @@
 using EmployeeAttendance.DAL.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeAttendance.DAL.Repositories.Impl
 {
@@ -10,10 +11,10 @@ namespace EmployeeAttendance.DAL.Repositories.Impl
             _dataContext = dataContext;
         }
         
-        public void Create(Employee employee)
+        public async Task Create(Employee employee)
         {
             // employee.Id = Guid.NewGuid();
-            _dataContext.Employees.Add(employee);
+            await _dataContext.Employees.AddAsync(employee);
         }
 
         public void Delete(Employee employeeToDelete)
@@ -21,19 +22,19 @@ namespace EmployeeAttendance.DAL.Repositories.Impl
             _dataContext.Employees.Remove(employeeToDelete);
         }
 
-        public IEnumerable<Employee> GetAll()
+        public async Task<IEnumerable<Employee>> GetAll()
         {
-            return _dataContext.Employees;
+            return await _dataContext.Employees.ToListAsync();
         }
 
-        public Employee? GetById(Guid id)
+        public async Task<Employee?> GetById(Guid id)
         {
-            return _dataContext.Employees.FirstOrDefault(e => e.Id == id);
+            return await _dataContext.Employees.FirstOrDefaultAsync(e => e.Id == id);
         }
 
-        public void SaveChanges()
+        public async Task SaveChanges()
         {
-           _dataContext.SaveChanges();
+           await _dataContext.SaveChangesAsync();
         }
     }
 }

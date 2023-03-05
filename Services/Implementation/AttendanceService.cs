@@ -19,36 +19,36 @@ namespace EmployeeAttendance.Services.Implementation
             _logger = logger;
         }
 
-        public void Create(Attendance attendance)
+        public async Task Create(Attendance attendance)
         {
             _logger.LogInformation($"Executing {nameof(Create)} method");
 
-            _employeeService.GetById(attendance.EmployeeId);
-            _attendanceRepository.Create(attendance);
-            _attendanceRepository.SaveChanges();
+            await _employeeService.GetById(attendance.EmployeeId);
+            await _attendanceRepository.Create(attendance);
+            await _attendanceRepository.SaveChanges();
         }
 
-        public void Delete(Guid id)
+        public async Task Delete(Guid id)
         {
             _logger.LogInformation($"Executing {nameof(Delete)} method");
 
-            var attendanceToDlete = GetById(id);
+            var attendanceToDlete = await GetById(id);
             _attendanceRepository.Delete(attendanceToDlete);
-            _attendanceRepository.SaveChanges();
+            await _attendanceRepository.SaveChanges();
         }
 
-        public IEnumerable<Attendance> GetAll()
+        public async Task<IEnumerable<Attendance>> GetAll()
         {
             _logger.LogInformation($"Executing {nameof(GetAll)} method");
 
-            return _attendanceRepository.GetAll();
+            return await _attendanceRepository.GetAll();
         }
 
-        public Attendance GetById(Guid id)
+        public async Task<Attendance> GetById(Guid id)
         {
             _logger.LogInformation($"Executing {nameof(GetById)} method");
 
-            var attendance = _attendanceRepository.GetById(id);
+            var attendance = await _attendanceRepository.GetById(id);
             if (attendance == null)
             {
                 var errorMessage = $"Attendance with id: {id} not found";
@@ -59,16 +59,16 @@ namespace EmployeeAttendance.Services.Implementation
             return attendance;
         }
 
-        public void Update(Guid id, Attendance attendance)
+        public async Task Update(Guid id, Attendance attendance)
         {
             _logger.LogInformation($"Executing {nameof(Update)} method");
 
-            var attendanceToUpdate = GetById(id);
+            var attendanceToUpdate = await GetById(id);
 
             attendanceToUpdate.CrossDateTime = attendance.CrossDateTime;
             attendanceToUpdate.AttendanceType = attendance.AttendanceType;
 
-            _attendanceRepository.SaveChanges();
+            await _attendanceRepository.SaveChanges();
         }
     }
 }

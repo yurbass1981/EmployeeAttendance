@@ -18,34 +18,35 @@ namespace EmployeeAttendance.Services.Implementation
             _logger = logger;
         }
 
-        public void Create(Employee employee)
+        public async Task Create(Employee employee)
         {
             _logger.LogInformation($"Executing {nameof(Create)} method");
-            _employeeRepository.Create(employee);
-            _employeeRepository.SaveChanges();
+            
+            await _employeeRepository.Create(employee);
+            await _employeeRepository.SaveChanges();
         }
 
-        public void Delete(Guid id)
+        public async Task Delete(Guid id)
         {
             _logger.LogInformation($"Executing {nameof(Delete)} method");
 
-            var employeeToDelete = GetById(id);
+            var employeeToDelete = await GetById(id);
             _employeeRepository.Delete(employeeToDelete);
-            _employeeRepository.SaveChanges();
+            await _employeeRepository.SaveChanges();
         }
 
-        public IEnumerable<Employee> GetAll()
+        public async Task<IEnumerable<Employee>> GetAll()
         {
             _logger.LogInformation($"Executing {nameof(GetAll)} method");
 
-            return _employeeRepository.GetAll();
+            return await _employeeRepository.GetAll();
         }
 
-        public Employee GetById(Guid id)
+        public async Task<Employee> GetById(Guid id)
         {
             _logger.LogInformation($"Executing {nameof(GetById)} method");
 
-            var employee = _employeeRepository.GetById(id);
+            var employee = await _employeeRepository.GetById(id);
             if (employee == null)
             {
                 var errorMessage = $"Employee with id: {id} not found";
@@ -56,18 +57,18 @@ namespace EmployeeAttendance.Services.Implementation
             return employee;
         }
 
-        public void Update(Guid id, Employee employee)
+        public async Task Update(Guid id, Employee employee)
         {
             _logger.LogInformation($"Executing {nameof(Update)} method");
 
-            var employeeToUpdate = GetById(id);
+            var employeeToUpdate = await GetById(id);
 
             employeeToUpdate.Name = employee.Name;
             employeeToUpdate.LastName = employee.LastName;
             employeeToUpdate.Age = employee.Age;
             employeeToUpdate.HireDate = employee.HireDate;
 
-            _employeeRepository.SaveChanges();
+            await _employeeRepository.SaveChanges();
         }
     }
 }

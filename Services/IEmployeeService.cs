@@ -4,10 +4,10 @@ namespace EmployeeAttendance.Services
 {
     public interface IEmployeeService
     {
-        void Create (Employee employee);
-        Employee GetById (Guid id);
-        IEnumerable<Employee> GetAll ();
-        void Update (Guid id, Employee employee);
-        void Delete (Guid id);
+        Task Create (Employee employee);
+        Task<Employee> GetById (Guid id);
+        Task<IEnumerable<Employee>> GetAll ();
+        Task Update (Guid id, Employee employee);
+        Task Delete (Guid id);
     }
 }

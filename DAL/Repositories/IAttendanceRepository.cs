@@ -4,10 +4,10 @@ namespace EmployeeAttendance.DAL.Repositories
 {
     public interface IAttendanceRepository
     {        
-        void Create(Attendance attendance);
-        Attendance? GetById(Guid id);
-        IEnumerable<Attendance> GetAll();
+        Task Create(Attendance attendance);
+        Task<Attendance?> GetById(Guid id);
+        Task<IEnumerable<Attendance>> GetAll();
         void Delete(Attendance attendance);
-        void SaveChanges();
+        Task SaveChanges();
     }
 }
