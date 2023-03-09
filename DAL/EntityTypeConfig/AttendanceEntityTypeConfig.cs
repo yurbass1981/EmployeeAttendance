@@ -14,10 +14,6 @@ namespace EmployeeAttendance.DAL.EntityTypeConfig
             builder.Property(a => a.AttendanceType)
                 .IsRequired()
                 .HasConversion<string>();          
-
-            builder.HasOne(a => a.Employee)
-                .WithMany(e => e.EmployeeAttendance)
-                .HasForeignKey(a => a.EmployeeId);
         }
 
     }

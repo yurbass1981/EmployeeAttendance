@@ -33,8 +33,7 @@ namespace EmployeeAttendance.Services.Implementation
             _logger.LogInformation($"Executing {nameof(Delete)} method");
 
             var attendanceToDlete = await GetById(id);
-            _attendanceRepository.Delete(attendanceToDlete);
-            await _attendanceRepository.SaveChanges();
+            await _attendanceRepository.Delete(attendanceToDlete);
         }
 
         public async Task<IEnumerable<Attendance>> GetAll()

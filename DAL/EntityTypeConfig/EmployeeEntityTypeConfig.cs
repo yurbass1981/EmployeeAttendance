@@ -24,7 +24,7 @@ namespace EmployeeAttendance.DAL.EntityTypeConfig
                 .IsRequired();
 
             builder.HasMany(e => e.EmployeeAttendance)
-                .WithOne(a => a.Employee)
+                .WithOne()
                 .HasForeignKey(a => a.EmployeeId);
                 
         }

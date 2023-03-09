@@ -42,7 +42,7 @@ namespace EmployeeAttendance.DAL.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Attendances");
+                    b.ToTable("Attendances", (string)null);
                 });
 
             modelBuilder.Entity("EmployeeAttendance.DAL.Entities.Employee", b =>
@@ -69,7 +69,7 @@ namespace EmployeeAttendance.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("EmployeeAttendance.DAL.Entities.Attendance", b =>
