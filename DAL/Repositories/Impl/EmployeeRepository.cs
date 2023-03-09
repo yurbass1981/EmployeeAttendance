@@ -29,7 +29,9 @@ namespace EmployeeAttendance.DAL.Repositories.Impl
 
         public async Task<Employee?> GetById(Guid id)
         {
-            return await _dataContext.Employees.FirstOrDefaultAsync(e => e.Id == id);
+            return await _dataContext.Employees
+                .Include(e => e.EmployeeAttendance)
+                .FirstOrDefaultAsync(e => e.Id == id);
         }
 
         public async Task SaveChanges()
