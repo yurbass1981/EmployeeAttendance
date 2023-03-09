@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace EmployeeAttendance.DAL.Entities
 {
@@ -9,7 +10,7 @@ namespace EmployeeAttendance.DAL.Entities
         public string LastName { get; set; }
         public int Age { get; set; }
         public DateTime HireDate { get; set; }
-        
-        public List<Attendance> EmployeeAttendance { get; set; }
+
+        public List<Attendance> EmployeeAttendance { get; set; } = new List<Attendance>();
     }
 }
