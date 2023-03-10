@@ -2,6 +2,7 @@ using EmployeeAttendance.DAL;
 using EmployeeAttendance.DAL.EntityTypeConfig;
 using EmployeeAttendance.DAL.Repositories;
 using EmployeeAttendance.DAL.Repositories.Impl;
+using EmployeeAttendance.Middleware;
 using EmployeeAttendance.Services;
 using EmployeeAttendance.Services.Implementation;
 using Microsoft.EntityFrameworkCore;
@@ -32,6 +33,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 
