@@ -10,7 +10,6 @@ namespace EmployeeAttendance.DAL.Entities
         public string LastName { get; set; }
         public int Age { get; set; }
         public DateTime HireDate { get; set; }
-
         public List<Attendance> EmployeeAttendance { get; set; } = new List<Attendance>();
     }
 }

@@ -52,7 +52,5 @@ namespace EmployeeAttendance.Controllers
             await _attendanceService.Delete(id);
             return Ok();
         }
-
-
     }
 }

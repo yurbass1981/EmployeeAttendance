@@ -8,7 +8,6 @@ namespace EmployeeAttendance.DAL.Entities
         public Guid Id { get; set; }
         public DateTime CrossDateTime { get; set; }
         public AttendanceType AttendanceType { get; set; }
-        
         public Guid EmployeeId { get; set; }
     }
 }

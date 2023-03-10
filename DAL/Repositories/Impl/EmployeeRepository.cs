@@ -17,9 +17,10 @@ namespace EmployeeAttendance.DAL.Repositories.Impl
             await _dataContext.Employees.AddAsync(employee);
         }
 
-        public void Delete(Employee employeeToDelete)
+        public async Task Delete(Employee employeeToDelete)
         {
             _dataContext.Employees.Remove(employeeToDelete);
+            await _dataContext.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Employee>> GetAll()
