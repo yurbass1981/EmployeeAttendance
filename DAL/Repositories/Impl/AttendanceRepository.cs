@@ -26,7 +26,9 @@ namespace EmployeeAttendance.DAL.Repositories.Impl
 
         public async Task<IEnumerable<Attendance>> GetAll()
         {
-            return await _dataContext.Attendances.ToListAsync();
+            return await _dataContext.Attendances
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<Attendance?> GetById(Guid id)
