@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EmployeeAttendance.DAL.Entities;
 using EmployeeAttendance.DAL.Repositories;
+using EmployeeAttendance.Exceptions;
 
 namespace EmployeeAttendance.Services.Implementation
 {
@@ -31,8 +32,7 @@ namespace EmployeeAttendance.Services.Implementation
             _logger.LogInformation($"Executing {nameof(Delete)} method");
 
             var employeeToDelete = await GetById(id);
-            _employeeRepository.Delete(employeeToDelete);
-            await _employeeRepository.SaveChanges();
+            await _employeeRepository.Delete(employeeToDelete);
         }
 
         public async Task<IEnumerable<Employee>> GetAll()
@@ -49,9 +49,7 @@ namespace EmployeeAttendance.Services.Implementation
             var employee = await _employeeRepository.GetById(id);
             if (employee == null)
             {
-                var errorMessage = $"Employee with id: {id} not found";
-                _logger.LogError(errorMessage);
-                throw new Exception(errorMessage);
+                throw new EmployeeNotFoundException($"Employee with id: {id} not found");
             }
 
             return employee;

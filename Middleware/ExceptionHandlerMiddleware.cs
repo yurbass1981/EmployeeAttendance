@@ -5,6 +5,7 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 using EmployeeAttendance.DTO;
+using EmployeeAttendance.Exceptions;
 
 namespace EmployeeAttendance.Middleware
 {
@@ -25,12 +26,12 @@ namespace EmployeeAttendance.Middleware
             {
                 await _next(httpContext);
             }
-            catch (KeyNotFoundException ex)
+            catch (EntityNotFoundException ex)
             {
                 await HandleExceptionAsync(httpContext,
                 ex.Message,
-                HttpStatusCode.NotFound,
-                "Element hasn't been found");
+                HttpStatusCode.NotFound, 
+                ex.Message);
             }
             catch (Exception ex)
             {

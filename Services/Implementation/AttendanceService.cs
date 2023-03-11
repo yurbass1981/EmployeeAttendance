@@ -1,5 +1,6 @@
 using EmployeeAttendance.DAL.Entities;
 using EmployeeAttendance.DAL.Repositories;
+using EmployeeAttendance.Exceptions;
 
 namespace EmployeeAttendance.Services.Implementation
 {
@@ -49,10 +50,8 @@ namespace EmployeeAttendance.Services.Implementation
 
             var attendance = await _attendanceRepository.GetById(id);
             if (attendance == null)
-            {
-                var errorMessage = $"Attendance with id: {id} not found";
-                _logger.LogError(errorMessage);
-                throw new Exception(errorMessage);
+            {                
+                throw new AttendanceNotFoundException($"Attendance with id: {id} not found");
             }
 
             return attendance;
