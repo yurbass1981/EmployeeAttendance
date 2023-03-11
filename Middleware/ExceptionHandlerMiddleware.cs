@@ -25,6 +25,13 @@ namespace EmployeeAttendance.Middleware
             {
                 await _next(httpContext);
             }
+            catch (KeyNotFoundException ex)
+            {
+                await HandleExceptionAsync(httpContext,
+                ex.Message,
+                HttpStatusCode.NotFound,
+                "Element hasn't been found");
+            }
             catch (Exception ex)
             {
                 await HandleExceptionAsync(httpContext,
