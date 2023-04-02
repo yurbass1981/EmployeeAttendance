@@ -26,6 +26,7 @@ namespace EmployeeAttendance.DAL.Repositories.Impl
         public async Task<IEnumerable<Employee>> GetAll()
         {
             return await _dataContext.Employees
+                .Include(e => e.EmployeeAttendance)
                 .AsNoTracking()
                 .ToListAsync();
         }
