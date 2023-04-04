@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using EmployeeAttendance.DAL;
 using EmployeeAttendance.DAL.EntityTypeConfig;
 using EmployeeAttendance.DAL.Repositories;
@@ -13,7 +14,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConection")));
-builder.Services.AddControllers();
+    
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
 
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
