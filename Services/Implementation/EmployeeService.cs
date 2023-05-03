@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EmployeeAttendance.DAL.Entities;
 using EmployeeAttendance.DAL.Repositories;
+using EmployeeAttendance.DTO;
 using EmployeeAttendance.Exceptions;
 
 namespace EmployeeAttendance.Services.Implementation
@@ -22,7 +23,7 @@ namespace EmployeeAttendance.Services.Implementation
         public async Task Create(Employee employee)
         {
             _logger.LogInformation($"Executing {nameof(Create)} method");
-            
+
             await _employeeRepository.Create(employee);
             await _employeeRepository.SaveChanges();
         }
@@ -35,13 +36,15 @@ namespace EmployeeAttendance.Services.Implementation
             await _employeeRepository.Delete(employeeToDelete);
         }
 
-        public async Task<IEnumerable<Employee>> GetAll(int page, int size)
+        public async Task<PageResultDto<IEnumerable<Employee>>> GetAll(int page, int size)
         {
             _logger.LogInformation($"Executing {nameof(GetAll)} method");
 
-            //var total = await _employeeRepository.Count();
-            var data = await _employeeRepository.GetAll(page, size);
-            return data;
+            return new PageResultDto<IEnumerable<Employee>>()
+            {
+                Data = await _employeeRepository.GetAll(page, size),
+                Total = await _employeeRepository.Count()
+            };
         }
 
         public async Task<Employee> GetById(Guid id)

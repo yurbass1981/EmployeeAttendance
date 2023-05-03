@@ -1,4 +1,5 @@
 using EmployeeAttendance.DAL.Entities;
+using EmployeeAttendance.DTO;
 using EmployeeAttendance.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,14 +26,14 @@ public class EmployeeController : ControllerBase
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<IActionResult> GetById(Guid id)
+    public async Task<ActionResult<Employee>> GetById(Guid id)
     {
         var employee = await _employeeService.GetById(id);
         return Ok(employee);
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery] int page, [FromQuery] int size)
+    public async Task<ActionResult<PageResultDto<IEnumerable<Employee>>>> GetAll([FromQuery] int page, [FromQuery] int size)
     {
         var allEmployees = await _employeeService.GetAll(page, size);
         return Ok(allEmployees);
