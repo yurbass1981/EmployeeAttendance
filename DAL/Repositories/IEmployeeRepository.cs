@@ -6,7 +6,8 @@ namespace EmployeeAttendance.DAL.Repositories
     {
         Task Create(Employee employee);
         Task<Employee?> GetById(Guid id);
-        Task<IEnumerable<Employee>> GetAll();
+        Task<IEnumerable<Employee>> GetAll(int page, int size);
+        Task<int> Count();
         Task Delete(Employee employee);
         Task SaveChanges();
     }

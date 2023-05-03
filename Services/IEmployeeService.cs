@@ -6,7 +6,7 @@ namespace EmployeeAttendance.Services
     {
         Task Create (Employee employee);
         Task<Employee> GetById (Guid id);
-        Task<IEnumerable<Employee>> GetAll ();
+        Task<IEnumerable<Employee>> GetAll (int page, int size); //create class PageResult<T> {int Total, T Data}
         Task Update (Guid id, Employee employee);
         Task Delete (Guid id);
     }

@@ -32,9 +32,9 @@ public class EmployeeController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll([FromQuery] int page, [FromQuery] int size)
     {
-        var allEmployees = await _employeeService.GetAll();
+        var allEmployees = await _employeeService.GetAll(page, size);
         return Ok(allEmployees);
     }
 
